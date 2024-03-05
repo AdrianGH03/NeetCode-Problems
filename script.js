@@ -204,3 +204,42 @@ var productExceptSelf = function(nums) { //Study this                           
 };
 
 console.log(productExceptSelf([-1,1,0,-3,3]))
+
+console.log("---------------------------------------")
+
+var isValidSudoku = function(board) {
+    // Create 9 empty objects for rows and columns
+    const rows = new Array(9).fill().map(() => ({}));
+    const columns = new Array(9).fill().map(() => ({}));
+
+    // Iterate through each cell in the 9x9 board
+    for(let i = 0; i < 9; i++){
+        for(let j = 0; j < 9; j++){
+            // Get the value of the cell
+            let cell = board[i][j];
+            // If the cell is not empty
+            if(cell !== '.'){
+                // If the value already exists in the current row or column, return false
+                if(rows[i][cell] || columns[j][cell]){
+                    return false;
+                }
+                // Mark the value as seen in the current row and column
+                rows[i][cell] = true;
+                columns[j][cell] = true;
+            }
+        }
+    }
+    // If no duplicate values are found in any row or column, return true
+    return true;
+};
+
+console.log(isValidSudoku([
+["8","3",".",".","7",".",".",".","."],
+["6",".",".","1","9","5",".",".","."],
+[".","9","8",".",".",".",".","6","."],
+["8",".",".",".","6",".",".",".","3"],
+["4",".",".","8",".","3",".",".","1"],
+["7",".",".",".","2",".",".",".","6"],
+[".","6",".",".",".",".","2","8","."],
+[".",".",".","4","1","9",".",".","5"],
+[".",".",".",".","8",".",".","7","9"]]))
