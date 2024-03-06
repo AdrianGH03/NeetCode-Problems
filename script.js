@@ -243,3 +243,58 @@ console.log(isValidSudoku([
 [".","6",".",".",".",".","2","8","."],
 [".",".",".","4","1","9",".",".","5"],
 [".",".",".",".","8",".",".","7","9"]]))
+
+
+console.log('---------------------')
+
+//Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.
+function encode(strs) {
+    if(strs.length == 0){
+        return "<empty>"
+    }
+    return strs.join('<|>');
+}
+
+/**
+ * @param {string} str
+ * @returns {string[]}
+ */
+function decode(str) {
+    if(str === "<empty>"){
+        return [];
+    }
+    return str.split('<|>');
+}
+let array = [""];
+let array2 = []
+console.log(encode(array));
+console.log(decode(encode(array)));
+console.log(encode(array2));
+console.log(decode(encode(array2)));
+
+
+console.log('---------------------')
+
+var longestConsecutive = function(nums) {
+    let numSet = new Set(nums);
+    let maxLength = 0;
+
+    for(let num of numSet){
+        if(!numSet.has(num - 1)){
+            let currentNum = num;
+            let currentLength = 1;
+
+            while(numSet.has(currentNum + 1)){
+                currentNum += 1;
+                currentLength += 1;
+            }
+
+            maxLength = Math.max(maxLength, currentLength);
+        }
+    }
+
+    return maxLength;
+};
+
+console.log(test([100,4,200,1,3,2]))
+console.log(test([0,3,7,2,5,8,4,6,0,1]))
