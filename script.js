@@ -298,3 +298,20 @@ var longestConsecutive = function(nums) {
 
 console.log(test([100,4,200,1,3,2]))
 console.log(test([0,3,7,2,5,8,4,6,0,1]))
+
+console.log('---------------------')
+var twoSum = function(nums, target) {
+    
+    const pairs = {}; 
+    for(i = 0; i < nums.length; i++){
+      var difference = target - nums[i]
+      if (difference in pairs){
+        return [pairs[difference], i]
+      } else {
+        pairs[nums[i]] = i
+      }
+      
+    }
+  };
+
+  console.log(twoSum(nums, target))
