@@ -296,8 +296,8 @@ var longestConsecutive = function(nums) {
     return maxLength;
 };
 
-console.log(test([100,4,200,1,3,2]))
-console.log(test([0,3,7,2,5,8,4,6,0,1]))
+console.log(longestConsecutive([100,4,200,1,3,2]))
+console.log(longestConsecutive([0,3,7,2,5,8,4,6,0,1]))
 
 console.log('---------------------')
 var twoSum = function(nums, target) {
@@ -314,4 +314,33 @@ var twoSum = function(nums, target) {
     }
   };
 
-  console.log(twoSum(nums, target))
+  console.log(twoSum(3,9))
+
+    console.log('---------------------')
+    var isValid = function(s) {
+        var sArr = [...s]
+        var sStack = []
+        var brackets = {
+            '(': ')',
+            '[': ']',
+            '{': '}'
+        }
+        for(let i = 0; i < sArr.length; i++){
+            if(brackets.hasOwnProperty(sArr[i])){
+               sStack.push(sArr[i]) 
+            } else if (sStack.length !== 0 && brackets[sStack[sStack.length-1]] == sArr[i]){
+                sStack.pop()
+            } else {
+                return false;
+            }
+        }
+        if(sStack.length === 0){
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    console.log(isValid("()")) //true
+    console.log(isValid("()[]{}")) //true
+    console.log(isValid("(]")) // false
