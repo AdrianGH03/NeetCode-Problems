@@ -344,3 +344,51 @@ var twoSum = function(nums, target) {
     console.log(isValid("()")) //true
     console.log(isValid("()[]{}")) //true
     console.log(isValid("(]")) // false
+
+console.log('------------------------------')
+
+
+var MinStack = function() {
+    this.minStack = []
+    this.minVal = []
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MinStack.prototype.push = function(val) {
+    this.minStack[this.minStack.length] = val;
+    if (this.minVal.length === 0 || val <= this.minVal[this.minVal.length - 1]) {
+        this.minVal[this.minVal.length] = val;
+    } else {
+        this.minVal[this.minVal.length] = this.minVal[this.minVal.length - 1];
+    }
+};
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function() {
+    if (this.minStack.length > 0) {
+        this.minStack.splice(this.minStack.length - 1, 1);
+        this.minVal.splice(this.minVal.length - 1, 1);
+    }
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function() {
+    var last = this.minStack[this.minStack.length-1]
+    return last
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function() {
+    var last = this.minVal[this.minVal.length-1]
+    return last
+};
+
