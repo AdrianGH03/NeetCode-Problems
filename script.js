@@ -392,3 +392,53 @@ MinStack.prototype.getMin = function() {
     return last
 };
 
+console.log('------------------------------')
+
+var evalRPN = function(tokens) {
+    const stack = []
+    let operators = ["*", "+", "-", "/"];
+    for(let i = 0; i < tokens.length; i++){
+        if(operators.includes(tokens[i]) && stack.length != 0){
+            let firstVal = stack.pop()
+            let secondVal = stack.pop()
+            let result;
+            if (tokens[i] === "/") {
+                result = Math.trunc(secondVal / firstVal);
+            } else {
+                result = eval(`${secondVal} ${tokens[i]} ${firstVal}`);
+            }
+            stack.push(result)
+        } else {
+            stack.push(parseInt(tokens[i]))
+        }
+    }
+
+    return stack[0]
+};
+
+//Faster solution (NOT MINE)
+var evalRPN = function(tokens) {
+    const stack = [];
+    const operators = {
+        '+': (a, b) => a + b,
+        '-': (a, b) => a - b,
+        '*': (a, b) => a * b,
+        '/': (a, b) => Math.trunc(a / b)
+    };
+
+    for(let i = 0; i < tokens.length; i++){
+        if(tokens[i] in operators){
+            let firstVal = stack.pop();
+            let secondVal = stack.pop();
+            stack.push(operators[tokens[i]](secondVal, firstVal));
+        } else {
+            stack.push(parseInt(tokens[i]));
+        }
+    }
+
+    return stack[0];
+};
+
+console.log(evalRPN(["2","1","+","3","*"]))
+console.log(evalRPN(["4","13","5","/","+"]))
+console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
