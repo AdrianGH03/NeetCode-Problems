@@ -442,3 +442,34 @@ var evalRPN = function(tokens) {
 console.log(evalRPN(["2","1","+","3","*"]))
 console.log(evalRPN(["4","13","5","/","+"]))
 console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
+
+console.log('-------------------------------')
+
+var generateParenthesis = function(n) {
+    let parStack = []
+    let result = []
+
+    pushParentheses = function (openNum, closedNum){
+        if(openNum == n && closedNum == n){
+            result.push(parStack.join(""))
+            return
+        }
+
+        if (openNum < n){
+            parStack.push("(")
+            pushParentheses(openNum + 1, closedNum)
+            parStack.pop()
+        }
+
+        if (closedNum < openNum){
+            parStack.push(")")
+            pushParentheses(openNum, closedNum + 1)
+            parStack.pop()
+        }
+    }
+
+    pushParentheses(0,0)
+    return result
+};
+
+console.log(generateParenthesis(3))
