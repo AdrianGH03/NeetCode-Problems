@@ -473,3 +473,28 @@ var generateParenthesis = function(n) {
 };
 
 console.log(generateParenthesis(3))
+
+console.log('-------------------------------')
+
+var dailyTemperatures = function(temperatures) {
+    //push each element to stack.
+    //compare top of stack with previous value
+    //keep track of index
+    //if previous value in stack is smaller, subtract the difference in index for the smaller number and set it as the index in resultArr
+    //if no greater value and no more elements, set to 0.
+    
+    let resultArr = new Array(temperatures.length).fill(0);
+    let stack = [];
+
+    for(let i = 0; i < temperatures.length; i++){
+        while(stack.length > 0 && temperatures[i] > temperatures[stack[stack.length - 1]]){
+            let index = stack.pop();
+            resultArr[index] = i - index;
+        }
+        stack.push(i);
+    }
+
+    return resultArr;
+};
+
+console.log(dailyTemperatures([73,74,75,71,69,72,76,73]))
