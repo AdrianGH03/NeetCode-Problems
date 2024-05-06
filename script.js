@@ -498,3 +498,20 @@ var dailyTemperatures = function(temperatures) {
 };
 
 console.log(dailyTemperatures([73,74,75,71,69,72,76,73]))
+console.log('-------------------------------')
+
+var containsDuplicate = function(nums) {
+    let numCount = {}
+    for(let i = 0; i < nums.length; i++){
+        if(!numCount.hasOwnProperty(nums[i])){
+            numCount[i] = nums[i]
+        } else {
+            return true;
+        }
+    }
+    return false;
+};
+
+console.log(containsDuplicate([1,1,1,3,3,4,3,2,4,2]))
+console.log(containsDuplicate([1,2,3,4]))
+console.log(containsDuplicate([1,2,3,1]))
