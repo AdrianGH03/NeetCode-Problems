@@ -515,3 +515,31 @@ var containsDuplicate = function(nums) {
 console.log(containsDuplicate([1,1,1,3,3,4,3,2,4,2]))
 console.log(containsDuplicate([1,2,3,4]))
 console.log(containsDuplicate([1,2,3,1]))
+
+console.log('-------------------------------')
+
+//Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
+
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) {
+        return false;
+    }
+    let frequency = {};
+    
+    for (let char of s) {
+        frequency[char] = (frequency[char] || 0) + 1;
+    }
+    
+    for (let char of t) {
+        if (!frequency[char]) { 
+            return false;
+        }
+        frequency[char] -= 1;
+    }
+    
+    return true;
+};
+
+console.log(isAnagram("anagram", "nagaram"))
+console.log(isAnagram("a", "ab"))
+console.log(isAnagram("aacc", "ccac"))
