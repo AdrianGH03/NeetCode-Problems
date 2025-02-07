@@ -543,3 +543,124 @@ var isAnagram = function(s, t) {
 console.log(isAnagram("anagram", "nagaram"))
 console.log(isAnagram("a", "ab"))
 console.log(isAnagram("aacc", "ccac"))
+
+console.log('-------------------------------')
+
+function hasDuplicate(nums) {
+    var count = {}
+    for(let i = 0; i < nums.length; i++){
+        if(!(nums[i] in count)){
+            count[nums[i]] += 1
+        } else {
+            return true
+        }
+    }
+    return false
+}
+
+console.log(hasDuplicate([1,2,3,4,4]))
+console.log('-------------------------------')
+
+function isAna(s, t){
+    if(s.length !== t.length){
+        return false
+    }
+    var count = {}
+
+    for(let char of s){
+        count[char] = (count[char] || 0) + 1
+    }
+
+    for(let char of t){
+        if(!count[char]){
+            return false
+        } 
+        count[char] -= 1
+        
+    }
+    
+    return true
+
+}
+
+console.log(isAna("racecar", "carrace"))
+console.log('-------------------------------')
+
+// indices i and j from nums array that return to sum equal target
+// i and j cannot be the same index i.e. 0 and 0 = 5 + 5 = target of 10
+function twoSum(nums, target){
+    //take every number in nums and store it into hash object with key as number and index as value
+    //loop through every nums[i] and subtract it from target, find the difference of that in the hash object. 
+    // return [nums[i], count[difference]]
+
+    var store = {}
+    for(let i=0; i < nums.length; i++){
+        if(!store[nums[i]]){
+            store[nums[i]] = i
+        }
+
+        var difference = target - nums[i]
+        if(store[difference]){
+            return [nums[i], store[difference]]
+        }
+    }
+
+    return []
+}
+
+console.log(twoSum([3,4,5,6,7,5,4,3], 12))
+console.log('-------------------------------')
+
+function groupAna(strs) {
+    var result = {};
+    for (let word of strs) {
+        var count = new Array(26).fill(0); //a-z (26 letters)
+        for (let character of word) {
+            count[character.charCodeAt() - "a".charCodeAt()] += 1; //wherever character ascii minus a (beginning) ascii and adds 1 to that index. 
+        }
+        var key = count.join(','); //joins all values after counting i.e. 0,1,1,0,0,0,0,0,1..... and makes it the key
+        if (!result[key]) { //checks if key already exists
+            result[key] = [];
+        }
+        result[key].push(word); //pushes word to key if it exists already
+    }
+    return Object.values(result);
+}
+
+console.log(groupAna(["act", "pots", "tops", "cat", "stop", "hat"]));
+console.log('-------------------------------')
+
+function topKFreq(nums, k){
+    var count = {};
+    var buckets = [];
+    var knumber = [];
+
+    // Count the frequency of each number
+    for (let i = 0; i < nums.length; i++) {
+        if (!count.hasOwnProperty(nums[i])) {
+            count[nums[i]] = 1;
+        } else {
+            count[nums[i]] += 1;
+        }
+    }
+
+    // Create buckets based on frequency
+    for (let num in count) {
+        let freq = count[num];
+        if (!buckets[freq]) {
+            buckets[freq] = [];
+        }
+        buckets[freq].push(parseInt(num));
+    }
+    
+    // Collect the top k frequent elements
+    for (let i = buckets.length - 1; i >= 0 && knumber.length < k; i--) {
+        if (buckets[i]) {
+            knumber = knumber.concat(buckets[i]);
+        }
+    }
+
+    return knumber;
+}
+
+console.log(topKFreq([1,2,2,2,3,3,3], 2))
