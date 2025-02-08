@@ -664,3 +664,72 @@ function topKFreq(nums, k){
 }
 
 console.log(topKFreq([1,2,2,2,3,3,3], 2))
+console.log('-------------------------------')
+function encode(strs) {
+    //take each word, count their length, store their length + # and the word to the new string
+    var encoded_str = ""
+    for(let word of strs){
+        var wordlng = word.length
+        encoded_str += `${wordlng}#${word}`
+    }
+
+    return encoded_str
+}
+var test = encode(["we","say",":","yes","!@#$%^&*()"])
+function decode(str) {
+    var list = []
+    for(let i = 0; i < str.length; i++){
+        if(!isNaN(str[i])){
+            var numStr = '';
+            while (!isNaN(str[i])) {
+                numStr += str[i];
+                i++;
+            }
+            var wordlng = parseInt(numStr);
+            if (str[i] == "#") {
+                i++; 
+                var word = '';
+                for (let j = 0; j < wordlng; j++) {
+                    word += str[i + j];
+                }
+                list.push(word);
+                i += wordlng - 1
+            }
+        }
+        
+    }
+    return list
+}
+
+//Optimal solution, review
+//encode(strs) {
+//     let res = "";
+//     for (let s of strs) {
+//         res += s.length + "#" + s;
+//     }
+//     return res;
+// }
+
+// /**
+//  * @param {string} str
+//  * @returns {string[]}
+//  */
+// decode(str) {
+//     let res = [];
+//     let i = 0;
+//     while (i < str.length) {
+//         let j = i;
+//         while (str[j] !== '#') {
+//             j++;
+//         }
+//         let length = parseInt(str.substring(i, j));
+//         i = j + 1;
+//         j = i + length;
+//         res.push(str.substring(i, j));
+//         i = j;
+//     }
+//     return res;
+// }
+
+console.log(decode(test))
+
