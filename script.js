@@ -751,3 +751,49 @@ var maxArea = function(height) {
 };
 
 console.log(maxArea(179))
+
+console.log('-------------------------------')
+
+//Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
+
+//idea: left pointer and right pointer, get a set and store left and right values, then multiply each number, throw it in output array
+function productExceptSel(nums){
+    //set and output array creation
+    var left = []
+    var right = []
+    var output = []
+
+    
+    for(let i = 0; i < nums.length; i++){
+        left[i] = [];
+        for (let j = 0; j < i; j++) {
+            left[i].push(nums[j]);
+        }
+    }
+
+    for(let i = 0; i < nums.length; i++){
+        right[i] = [];
+        for (let j = i + 1; j < nums.length; j++) {
+            right[i].push(nums[j]);
+        }
+    }
+
+    //take set and combined left/right sets into one, multiple each number
+    //for each number, multiply += to a product, push product to output
+    var testset = []
+    for(let i = 0; i < left.length; i++){
+        testset[i] = left[i].concat(right[i])
+        var product = 1
+        for (let num of testset[i]) {
+            product *= num;
+        }
+        output.push(product)
+    }
+
+    //return output
+    return output
+}
+
+console.log(productExceptSel([1,2,4,6]))
+
+var test = [[], [1], [1,2], [1,2,4]]
