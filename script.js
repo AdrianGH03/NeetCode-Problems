@@ -797,3 +797,50 @@ function productExceptSel(nums){
 console.log(productExceptSel([1,2,4,6]))
 
 var test = [[], [1], [1,2], [1,2,4]]
+console.log('-------------------------------')
+
+//each array in the board array is a row
+//3 conditions
+    //compare duplicates in row, index of i in each array, and in 3x3 subbox
+
+    //new set
+
+    //for each row (array) in board, 
+        //set.add(row)
+        //for let i = 0 i < row.length i++
+            //if (set.has(row[i]))
+                //return true
+            //set.add(row[i])
+
+function isValidSud(board){
+    let checkRow = Array.from({ length: 9 }, () => new Set())
+    let checkCol = Array.from({ length: 9 }, () => new Set())
+    let checkBox = Array.from({ length: 9 }, () => new Set())
+
+    for (let row = 0; row < board.length; row++) {
+        for (let col = 0; col < board[row].length; col++) {
+            let value = board[row][col]
+            if(value !== '.'){
+                let assignedBox = Math.floor(row / 3) * 3 + Math.floor(col / 3)
+                if (checkBox[assignedBox].has(value) || checkCol[col].has(value) || checkRow[row].has(value)) {
+                    return false;
+                }
+                checkRow[row].add(value)
+                checkCol[col].add(value)
+                checkBox[assignedBox].add(value);
+            }
+        }
+    }
+    return true
+}
+
+console.log(isValidSud(
+    [["1","2",".",".","3",".",".",".","."],
+    ["4",".",".","5",".",".",".",".","."],
+    [".","9","8",".",".",".",".",".","3"],
+    ["5",".",".",".","6",".",".",".","4"],
+    [".",".",".","8",".","3",".",".","5"],
+    ["7",".",".",".","2",".",".",".","6"],
+    [".",".",".",".",".",".","2",".","."],
+    [".",".",".","4","1","9",".",".","8"],
+    [".",".",".",".","8",".",".","7","9"]]))
