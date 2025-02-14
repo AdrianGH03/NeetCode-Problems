@@ -844,3 +844,30 @@ console.log(isValidSud(
     [".",".",".",".",".",".","2",".","."],
     [".",".",".","4","1","9",".",".","8"],
     [".",".",".",".","8",".",".","7","9"]]))
+
+console.log('-------------------------------')
+
+function longestConsecutiv(nums) {
+    let trackSequence = new Set(nums)
+    let longestSequence = 0
+    
+    for(let i = 0; i < nums.length; i++){
+        for(let j = 0; j < nums.length; j++){
+            if(!trackSequence.has(nums[i] - 1)){
+                let currentNum = nums[i];
+                let currentStreak = 1;
+
+                while (trackSequence.has(currentNum + 1)) {
+                    currentNum += 1;
+                    currentStreak += 1;
+                }
+
+                longestSequence = Math.max(longestSequence, currentStreak);
+            }
+        }
+    }
+    return longestSequence
+}
+
+console.log(longestConsecutiv([0,3,2,5,4,6,1,1]))
+console.log(longestConsecutiv([2,20,4,10,3,4,5]))
