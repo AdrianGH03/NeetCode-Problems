@@ -852,18 +852,16 @@ function longestConsecutiv(nums) {
     let longestSequence = 0
     
     for(let i = 0; i < nums.length; i++){
-        for(let j = 0; j < nums.length; j++){
-            if(!trackSequence.has(nums[i] - 1)){
-                let currentNum = nums[i];
-                let currentStreak = 1;
+        if(!trackSequence.has(nums[i] - 1)){
+            let currentNum = nums[i];
+            let currentStreak = 1;
 
-                while (trackSequence.has(currentNum + 1)) {
-                    currentNum += 1;
-                    currentStreak += 1;
-                }
-
-                longestSequence = Math.max(longestSequence, currentStreak);
+            while (trackSequence.has(currentNum + 1)) {
+                currentNum += 1;
+                currentStreak += 1;
             }
+
+            longestSequence = Math.max(longestSequence, currentStreak);
         }
     }
     return longestSequence
@@ -871,3 +869,32 @@ function longestConsecutiv(nums) {
 
 console.log(longestConsecutiv([0,3,2,5,4,6,1,1]))
 console.log(longestConsecutiv([2,20,4,10,3,4,5]))
+
+console.log('-------------------------------')
+
+function isVal(s){
+    var stack = []
+    var pairs = {
+        "[": "]",
+        "{": "}",
+        "(": ")"
+    }
+
+    for(let i = 0; i < s.length; i++){
+        if(pairs.hasOwnProperty(s[i])){
+            stack.push(s[i])
+        } else if (pairs[stack[stack.length - 1]] == s[i]){
+            stack.pop()
+        } else {
+            return false
+        }
+        
+    }
+
+    return stack.length == 0 
+}
+
+console.log(isVal("]"))
+console.log('-------------------------------')
+
+
