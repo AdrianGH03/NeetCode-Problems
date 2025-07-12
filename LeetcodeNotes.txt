@@ -1,0 +1,86 @@
+Q Examples of each Big O notation
+O(1) - Constant Time, e.g., accessing an element in an array by index.
+O(log n) - Logarithmic Time, e.g., binary search in a sorted array
+O(n) - Linear Time, e.g., iterating through all elements in an array.
+O(n log n) - Linearithmic Time, e.g., efficient sorting algorithms like mergesort or heapsort.
+O(n^2) - Quadratic Time, e.g., bubble sort or selection sort.
+O(2^n) - Exponential Time, e.g., recursive calculation of Fibonacci numbers.
+O(n!) - Factorial Time, e.g., generating all permutations of a set of n elements.
+O(n^k) - Polynomial Time, e.g., algorithms that involve nested loops over the input size n.
+O(n^3) - Cubic Time, e.g., algorithms that involve three nested loops over the input size n.
+
+
+Q Steps to solve a problem
+1. Understand the problem statement.
+2. Think of ways to solve the problem
+3. Think end-to-end of the best solutions based on complexity.
+4. Write the algorithm from patterns in drawing (literally pen and paper)
+5. Write the code
+6. Improve the code
+7. Go through other solutions if you answered correctly
+
+
+
+Q Two sum answer 
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        num_set = {}
+        for index, num in enumerate(nums):
+            diff = target - num
+            if diff in num_set:
+                return [index, num_set[diff]]
+            num_set[num] = index
+
+
+
+
+Q How many numbers are less than the current number solutions
+
+class Solution(object):
+    def smallerNumbersThanCurrent(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+
+        numless = []
+        temp = sorted(nums)
+        d = {}
+        for index, num in enumerate(temp):
+            if num not in d:
+                d[num] = index
+        
+        for num in nums:
+            numless.append(d[num])
+            
+            
+
+        return numless
+
+Q Minimum time visting all points in a 2d graph solutions
+
+class Solution(object):
+    def minTimeToVisitAllPoints(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: int
+        """
+        seconds = 0
+        for i in range(len(points)-1):
+            xi_diff = points[i+1][0]- points[i][0]
+            xy_diff = points[i+1][1]- points[i][1]
+            x = abs(xi_diff)
+            y = abs(xy_diff)
+            if x > y:
+                seconds += x
+            else:
+                seconds += y
+        
+        return seconds
+        
